@@ -106,5 +106,5 @@ void			print_player_info(t_ginfo *ginfo);
 void			print_map(t_map *map);
 void			print_heatmap(t_map *map);
 void			print_shape(t_shape *shape);
-
+void		print_output(t_map *map);//////////не забудь это пидорнуть
 #endif

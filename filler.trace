@@ -1,8 +1,1 @@
-seed = 2799
-O: error on input
-./vdelsie.filler: Segfault at 0
-X: error on input
-./vdelsie.filler: Segfault at 0
-./vdelsie.filler won
-Score:
-0AGAINST0
+seed = 1680

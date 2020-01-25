@@ -6,11 +6,24 @@
 /*   By: vdelsie <vdelsie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:47:26 by vdelsie           #+#    #+#             */
-/*   Updated: 2020/01/24 15:29:11 by vdelsie          ###   ########.fr       */
+/*   Updated: 2020/01/25 17:58:35 by cyuriko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "filler.h"
+
+void		print_output(t_map *map)
+{
+	int height = -1;
+	int width = -1;
+	while (++height < map->height)
+	{
+		width = -1;
+		while (++width < map->width)
+			ft_putnbr(map->heat[height][width]);
+		ft_putchar('\n');
+	}
+}
 
 int			main(void)
 {
