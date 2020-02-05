@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdelsie <vdelsie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/20 14:19:59 by vdelsie           #+#    #+#             */
-/*   Updated: 2020/01/20 14:58:36 by vdelsie          ###   ########.fr       */
+/*   Created: 2020/02/04 13:55:54 by vdelsie           #+#    #+#             */
+/*   Updated: 2020/02/04 14:00:08 by vdelsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef FILLER_VIZUAL_H
+#ifndef FILLER_VIZUAL_H
 # define FILLER_VIZUAL_H
 # include <stddef.h>
 # define TURN_SWITCH	1
@@ -89,11 +89,11 @@ typedef struct		s_game
 	t_gslst			*last;
 }					t_game;
 
-
 /*
 ** t_image
 ** структура для хранения переменных, относящихся к изображениям mlx
 */
+
 typedef struct		s_image
 {
 	void			*image;

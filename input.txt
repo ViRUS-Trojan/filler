@@ -1,4 +1,4 @@
-$$$ exec p1 : [resources/players/vdelsie.filler]
+$$$ exec p1 : [./vdelsie.filler]
 Plateau 4 5:
     01234
 000 .....

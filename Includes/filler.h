@@ -5,106 +5,126 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdelsie <vdelsie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/20 14:31:57 by vdelsie           #+#    #+#             */
-/*   Updated: 2020/01/24 15:01:02 by vdelsie          ###   ########.fr       */
+/*   Created: 2020/01/27 17:28:33 by vdelsie           #+#    #+#             */
+/*   Updated: 2020/01/27 17:41:31 by vdelsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
 # define FILLER_H
 
-# include "../libft/libft.h"
+# include "../libft/includes/libft.h"
+# include "../libft/includes/get_next_line.h"
+# include "../libft/includes/ft_printf.h"
+# include <fcntl.h>
 
-# define MAX_VALUE 2147483647
+# define SMALL_MAP_MAX_W 20
+# define SMALL_MAP_MAX_H 20
+# define BOARD "Plateau"
+# define PIECE "Piece"
 
 typedef struct	s_map
 {
-	int			width;
-	int			height;
-	char		**array;
-	int			**heat;
+	char		value;
+	float		weight;
+	int			heat;
+	int			border;
 }				t_map;
 
-typedef struct	s_shape
+typedef struct	s_border
 {
-	int			width;
-	int			height;
-	char		**array;
-	int			width_r;
-	int			height_r;
-	int			x_offset;
-	int			y_offset;
-}				t_shape;
+	int			up;
+	int			down;
+	int			right;
+	int			left;
+}				t_border;
 
-typedef struct	s_pos
+typedef struct	s_game
 {
-	int			x;
-	int			y;
-	int			value;
-}				t_pos;
+	char		my_coin;
+	char		opp_coin;
+	char		player_position;
+	int			h_map;
+	int			w_map;
+	char		*gross_map;
+	t_map		**strat_map;
+	char		*piece;
+	int			h_piece;
+	int			w_piece;
+	int			pos_x;
+	int			pos_y;
+	int			place_found;
+	t_border	border;
+	float		coef_heat;
+	float		coef_border;
+}				t_game;
 
-typedef struct	s_ginfo
-{
-	int			player;
-	char		me;
-	char		enemy;
-	t_map		map;
-	t_shape		shape;
-}				t_ginfo;
-
-/*
-** main.c
-*/
-int				main(void);
-int				make_my_move(t_ginfo *ginfo);
-void			give_answer(t_ginfo *ginfo);
-int				try_this_pos(t_pos *pos, t_ginfo *ginfo);
 
 /*
-** read_input.c
+** Инструменты
 */
-int				get_player_info(t_ginfo *ginfo);
-int				read_map(t_map *map, char *line, t_ginfo *ginfo);
-void			read_map_dimen(t_map *map, char *line);
-int				read_shape(t_shape *shape);
-void			read_shape_dimen(t_shape *shape);
+int				ft_min(int a, int b);
+int				ft_max(int a, int b);
+int				ft_is_me(t_game game, char value);
+int				ft_is_opp(t_game game, char value);
+int				ft_is_empty(char value);
+int				ft_is_top_player(t_game game);
+int				ft_border_is_activate(t_game game);
+int				ft_heat_is_activate(t_game game);
+void			ft_activate_heat(t_game *game);
+void			ft_activate_border(t_game *game);
+void			ft_desactivate_border(t_game *game);
+int				init_start_middle_end(char *line, char **start, char **middle,
+																char **end);
 
 /*
-** heatmap.c
+** Init
 */
-void			build_heatmap(t_map *map, t_ginfo *ginfo);
-void			populate_heat(t_map *map, t_ginfo *ginfo, int current);
-void			set_neighbors(t_map *map, int i, int j, int new_val);
+int				ft_first_init(t_game *game);
+int				ft_get_data(t_game *game);
 
 /*
-** mini_shape.c
+** Алгоc - рассчитать вес карты
 */
-void			mini_shape(t_shape *shape);
-int				last_row_is_empty(t_shape *shape);
-int				last_col_is_empty(t_shape *shape);
+void			ft_first_heat_calc(t_game *game);
+void			ft_fill_heat_1(t_game *game);
+void			ft_fill_heat_2(t_game *game);
+void			ft_calc_heat_weight(t_game *game);
+void			ft_border_weight_from_up(t_game *game);
+void			ft_border_weight_from_down(t_game *game);
+void			ft_border_weight_from_right(t_game *game);
+void			ft_border_weight_from_left(t_game *game);
+void			ft_clear_border_weight(t_game *game);
+void			ft_strat_map_calc(t_game *game);
+
 
 /*
-** mini_shape_helper.c
+** Алгоc - выбрать место
 */
-int				first_row_is_empty(t_shape *shape);
-void			shift_up(t_shape *shape);
-int				first_col_is_empty(t_shape *shape);
-void			shift_left(t_shape *shape);
-void			shift_down(t_shape *shape);
+int				ft_put_piece(t_game *game, int round);
+
 
 /*
-** freedom.c
+** Алгос - настроить страт
 */
-void			free_all(t_ginfo *ginfo);
-void			free_map(t_map *map);
-void			free_shape(t_shape *shape);
+int				ft_check_the_up(t_game game);
+int				ft_check_the_down(t_game game);
+int				ft_check_the_right(t_game game);
+int				ft_check_the_left(t_game game);
+void			ft_strat_adjustment(t_game *game);
 
 /*
-** debug.c
+** Clear
 */
-void			print_player_info(t_ginfo *ginfo);
-void			print_map(t_map *map);
-void			print_heatmap(t_map *map);
-void			print_shape(t_shape *shape);
-void		print_output(t_map *map);//////////не забудь это пидорнуть
+void			ft_clear_all(t_game *game);
+void			ft_delete_all(t_game *game);
+
+/*
+** Debug
+*/
+void			ft_init_debug(t_game game);
+void			ft_put_stratmap(t_game game, int round);
+void			ft_put_place_score(int score, int i, int j);
+void			ft_put_best_place(int i, int j);
+
 #endif
