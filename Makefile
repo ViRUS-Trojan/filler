@@ -6,20 +6,20 @@
 #    By: vdelsie <vdelsie@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 13:10:21 by vdelsie           #+#    #+#              #
-#    Updated: 2020/02/04 15:54:20 by vdelsie          ###   ########.fr        #
+#    Updated: 2020/02/05 21:06:01 by vdelsie          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
 NAME = vdelsie.filler
-VIS = vdelsie.visualizer
+#VIS = vdelsie.visualizer
 
 CFLAGS = -Wall -Werror -Wextra -g
 
 INCLUDES = includes
 LIBFT = libft
-MLX = minilibx
+#MLX = minilibx
 
 SRC_CFILES = border_calc.c\
 			 border_check.c\
@@ -42,14 +42,14 @@ SRC_CFILES = border_calc.c\
 
 SRC_OFILES = $(SRC_CFILES:.c=.o)
 
-VIS_CFILES = color.c\
+#VIS_CFILES = color.c\
 			 image.c\
 			 key_hooks.c\
 			 render.c
 
-VIS_OFILES = $(VIS_CFILES:.c=.o)
+#VIS_OFILES = $(VIS_CFILES:.c=.o)
 
-all: $(NAME) $(VIS) 
+all: $(NAME) #$(VIS) 
 
 $(NAME):
 	@echo "\x1b[1m\nBuilding $(LIBFT) library...\x1b[0m"
@@ -58,25 +58,25 @@ $(NAME):
 	$(CC) $(CFLAGS) -c $(addprefix SRC/, $(SRC_CFILES)) -I$(INCLUDES)
 	$(CC) -o $(NAME) $(SRC_OFILES) -L$(LIBFT) -lft
 
-$(VIS):
-	@echo "\x1b[1m\nBuilding $(MLX) library...\x1b[0m"
-	make -C $(MLX)
-	@echo "\x1b[1m\nBuilding $(VIS)...\x1b[0m"
-	$(CC) $(CFLAGS) -c $(addprefix VIS/, $(VIS_CFILES)) -I$(INCLUDE)
-	$(CC) -o $(VIS) $(VIS_OFILES) -L$(LIBFT) -lft -L$(MLX) -lmlx\
+#$(VIS):
+	#@echo "\x1b[1m\nBuilding $(MLX) library...\x1b[0m"
+	#make -C $(MLX)
+	#@echo "\x1b[1m\nBuilding $(VIS)...\x1b[0m"
+	#$(CC) $(CFLAGS) -c $(addprefix VIS/, $(VIS_CFILES)) -I$(INCLUDE)
+	#$(CC) -o $(VIS) $(VIS_OFILES) -L$(LIBFT) -lft -L$(MLX) -lmlx\
 		-framework OpenGL -framework AppKit
 
 clean:
 	@echo "\x1b[1m\nCleaning...\x1b[0m"
 	make -C $(LIBFT) clean
-	make -C $(MLX) clean
-	/bin/rm -f $(VIS_OFILES)
+	#make -C $(MLX) clean
+	#/bin/rm -f $(VIS_OFILES)
 	/bin/rm -f $(SRC_OFILES)
 
 fclean: clean
 	/bin/rm -f $(LIBFT)/libft.a
-	/bin/rm -f $(MLX)/libmlx.a
-	/bin/rm -f $(VIS)/vdelsie.visualizer.a
+	#/bin/rm -f $(MLX)/libmlx.a
+	#/bin/rm -f $(VIS)/vdelsie.visualizer.a
 	/bin/rm -f $(NAME)
 
 re: fclean all
