@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdelsie <vdelsie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: curquiza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/30 03:44:59 by vdelsie           #+#    #+#             */
-/*   Updated: 2020/01/30 03:45:16 by vdelsie          ###   ########.fr       */
+/*   Created: 2016/11/15 11:50:10 by curquiza          #+#    #+#             */
+/*   Updated: 2016/11/29 16:23:10 by curquiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-
 /*
-** strdup используется для возврата цепочки malloc
+** strdup sert à renvoyer une chaine mallocé
 */
 
 char	*ft_strtrim(char const *s)

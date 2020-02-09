@@ -5,17 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdelsie <vdelsie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/27 17:28:33 by vdelsie           #+#    #+#             */
-/*   Updated: 2020/01/27 17:41:31 by vdelsie          ###   ########.fr       */
+/*   Created: 2020/02/09 17:03:08 by vdelsie           #+#    #+#             */
+/*   Updated: 2020/02/09 17:06:24 by vdelsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
 # define FILLER_H
 
-# include "../libft/includes/libft.h"
-# include "../libft/includes/get_next_line.h"
-# include "../libft/includes/ft_printf.h"
+# include "libft.h"
 # include <fcntl.h>
 
 # define SMALL_MAP_MAX_W 20
@@ -33,8 +31,8 @@ typedef struct	s_map
 
 typedef struct	s_border
 {
-	int			up;
-	int			down;
+	int			top;
+	int			bottom;
 	int			right;
 	int			left;
 }				t_border;
@@ -58,7 +56,6 @@ typedef struct	s_game
 	float		coef_heat;
 	float		coef_border;
 }				t_game;
-
 
 /*
 ** Инструменты
@@ -84,31 +81,29 @@ int				ft_first_init(t_game *game);
 int				ft_get_data(t_game *game);
 
 /*
-** Алгоc - рассчитать вес карты
+** Алгос - рассчитать вес карты
 */
 void			ft_first_heat_calc(t_game *game);
 void			ft_fill_heat_1(t_game *game);
 void			ft_fill_heat_2(t_game *game);
 void			ft_calc_heat_weight(t_game *game);
-void			ft_border_weight_from_up(t_game *game);
-void			ft_border_weight_from_down(t_game *game);
+void			ft_border_weight_from_top(t_game *game);
+void			ft_border_weight_from_bottom(t_game *game);
 void			ft_border_weight_from_right(t_game *game);
 void			ft_border_weight_from_left(t_game *game);
 void			ft_clear_border_weight(t_game *game);
 void			ft_strat_map_calc(t_game *game);
 
-
 /*
-** Алгоc - выбрать место
+** Алгос - выбери место
 */
 int				ft_put_piece(t_game *game, int round);
-
 
 /*
 ** Алгос - настроить страт
 */
-int				ft_check_the_up(t_game game);
-int				ft_check_the_down(t_game game);
+int				ft_check_the_top(t_game game);
+int				ft_check_the_bottom(t_game game);
 int				ft_check_the_right(t_game game);
 int				ft_check_the_left(t_game game);
 void			ft_strat_adjustment(t_game *game);

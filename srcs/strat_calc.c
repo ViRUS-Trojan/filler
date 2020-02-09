@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdelsie <vdelsie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/02 13:06:48 by vdelsie           #+#    #+#             */
-/*   Updated: 2020/02/04 13:26:42 by vdelsie          ###   ########.fr       */
+/*   Created: 2020/02/07 18:18:52 by vdelsie           #+#    #+#             */
+/*   Updated: 2020/02/07 18:18:57 by vdelsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void	ft_calc_global_weight(t_map *point, t_game game)
 	int		max_heat;
 	int		max_border;
 
-	max_heat = ft_max(game.h_map, game.w_map) * 4;//// примерное значение 
+	max_heat = ft_max(game.h_map, game.w_map) * 4;
 	max_border = ft_max(game.h_map, game.w_map);
-	point->weight = (game.coef_heat * point->heat / max_heat /////ТЕСТ проверим
+	point->weight = (game.coef_heat * point->heat / max_heat
 					+ game.coef_border * point->border / max_border)
 					* 100;
 }
@@ -32,15 +32,15 @@ static void	ft_init_coef(t_game *game)
 			ft_activate_heat(game);
 		else
 		{
-			game->border.down = 1;
-			//ft_border_weight_from_down(game);
+			game->border.bottom = 1;
+			ft_border_weight_from_bottom(game);
 			ft_activate_border(game);
 		}
 	}
 	else
 	{
-		game->border.up = 1;
-		//ft_border_weight_from_up(game);
+		game->border.top = 1;
+		ft_border_weight_from_top(game);
 		ft_activate_border(game);
 	}
 }

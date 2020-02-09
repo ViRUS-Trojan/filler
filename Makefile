@@ -1,84 +1,71 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: vdelsie <vdelsie@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/01/21 13:10:21 by vdelsie           #+#    #+#              #
-#    Updated: 2020/02/05 21:06:01 by vdelsie          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-CC = gcc
-
 NAME = vdelsie.filler
-#VIS = vdelsie.visualizer
 
-CFLAGS = -Wall -Werror -Wextra -g
+CC = gcc -Wall -Wextra -Werror
+#CC = gcc -Wall -Wextra -Werror -g -fsanitize=address
 
-INCLUDES = includes
-LIBFT = libft
-#MLX = minilibx
+C_DIR = srcs
+ifeq ($(DEBUG), 1)
+  C_DEBUG_FILE = $(C_DIR)/debug_files_others_on.c $(C_DIR)/debug_files_stratmap_on.c
+else
+  C_DEBUG_FILE = $(C_DIR)/debug_files_off.c
+endif
+C_OTHER_FILES = $(addprefix $(C_DIR)/, \
+				tools_basics.c \
+				tools_player.c \
+				tools_strat.c \
+				tools_read.c \
+				first_init.c \
+				get_data.c \
+				put_piece.c \
+				border_check.c \
+				border_calc.c \
+				border_clear.c \
+				heat_calc_main.c \
+				heat_calc_sub_fct.c \
+				strat_calc.c \
+				strat_adjustment.c \
+				delete_and_clear.c \
+				main.c)
+C_FILES = $(C_DEBUG_FILE) $(C_OTHER_FILES)
 
-SRC_CFILES = border_calc.c\
-			 border_check.c\
-			 border_clear.c\
-			 debug_files_others_on.c\
-			 debug_files_stratmap_on.c\
-			 delete_and_clear.c\
-			 strat_argument.c\
-			 heat_calc_sub_fct.c\
-			 heat_calc_main.c\
-			 strat_calc.c\
-			 first_init.c\
-			 put_piece.c\
-			 get_data.c\
-			 tools_strat.c\
-			 tools_player.c\
-			 tools_basics.c\
-			 tools_read.c\
-			 main.c
 
-SRC_OFILES = $(SRC_CFILES:.c=.o)
+O_DIR = objs
+O_FILES = $(C_FILES:$(C_DIR)/%.c=$(O_DIR)/%.o)
 
-#VIS_CFILES = color.c\
-			 image.c\
-			 key_hooks.c\
-			 render.c
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
+H_DIR = includes
 
-#VIS_OFILES = $(VIS_CFILES:.c=.o)
+LIB = -L$(LIBFT_DIR) -lft
+INCL = -I$(H_DIR) -I$(LIBFT_DIR)/includes
 
-all: $(NAME) #$(VIS) 
+all : debug $(NAME)
 
-$(NAME):
-	@echo "\x1b[1m\nBuilding $(LIBFT) library...\x1b[0m"
-	make -C $(LIBFT)
-	@echo "\x1b[1m\nBuilding $(NAME)...\x1b[0m"
-	$(CC) $(CFLAGS) -c $(addprefix SRC/, $(SRC_CFILES)) -I$(INCLUDES)
-	$(CC) -o $(NAME) $(SRC_OFILES) -L$(LIBFT) -lft
+$(LIBFT) :
+	@make -C $(LIBFT_DIR)
 
-#$(VIS):
-	#@echo "\x1b[1m\nBuilding $(MLX) library...\x1b[0m"
-	#make -C $(MLX)
-	#@echo "\x1b[1m\nBuilding $(VIS)...\x1b[0m"
-	#$(CC) $(CFLAGS) -c $(addprefix VIS/, $(VIS_CFILES)) -I$(INCLUDE)
-	#$(CC) -o $(VIS) $(VIS_OFILES) -L$(LIBFT) -lft -L$(MLX) -lmlx\
-		-framework OpenGL -framework AppKit
+$(NAME) : $(LIBFT) $(O_FILES)
+	@$(CC) $(O_FILES) -o $@ $(LIB)
 
-clean:
-	@echo "\x1b[1m\nCleaning...\x1b[0m"
-	make -C $(LIBFT) clean
-	#make -C $(MLX) clean
-	#/bin/rm -f $(VIS_OFILES)
-	/bin/rm -f $(SRC_OFILES)
+$(O_DIR)/%.o : $(C_DIR)/%.c $(H_DIR)
+	@mkdir -p $(O_DIR)
+	@$(CC) -o $@ -c $< $(INCL)
 
-fclean: clean
-	/bin/rm -f $(LIBFT)/libft.a
-	#/bin/rm -f $(MLX)/libmlx.a
-	#/bin/rm -f $(VIS)/vdelsie.visualizer.a
-	/bin/rm -f $(NAME)
+clean :
+	@make clean -C $(LIBFT_DIR)
+	@rm -rf $(O_DIR)
 
-re: fclean all
+fclean : clean
+	@make fclean -C $(LIBFT_DIR)
+	@rm -rf $(NAME)
 
-.PHONY: all clean fclean re
+re : fclean all
+
+debug:
+ifeq ($(DEBUG), 1)
+	@rm -rf $(O_DIR)/debug_files_off.o
+else
+	@rm -rf $(O_DIR)/debug_files_on.o
+endif
+
+.PHONY : clean all fclean re

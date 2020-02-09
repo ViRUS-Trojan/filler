@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strat_argument.c                                   :+:      :+:    :+:   */
+/*   strat_adjustment.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdelsie <vdelsie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/02 16:38:52 by vdelsie           #+#    #+#             */
-/*   Updated: 2020/02/05 21:55:47 by vdelsie          ###   ########.fr       */
+/*   Created: 2020/02/07 18:18:46 by vdelsie           #+#    #+#             */
+/*   Updated: 2020/02/07 18:18:47 by vdelsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 static void	ft_top_player_adjustment(t_game *game)
 {
-	if (game->border.down == 1 && ft_check_the_down(*game))
+	if (game->border.bottom == 1 && ft_check_the_bottom(*game))
 	{
-		game->border.up = 1;
-		game->border.down = 0;
-		ft_border_weight_from_up(game);
+		game->border.top = 1;
+		game->border.bottom = 0;
+		ft_border_weight_from_top(game);
 	}
-	if (game->border.up == 1)
+	if (game->border.top == 1)
 	{
-		if (ft_check_the_up(*game) == 1)
+		if (ft_check_the_top(*game) == 1)
 		{
 			ft_desactivate_border(game);
-			game->border.up = 0;
+			game->border.top = 0;
 		}
-		else if (ft_check_the_up(*game) == -1)
+		else if (ft_check_the_top(*game) == -1)
 		{
-			game->border.up = 0;
+			game->border.top = 0;
 			game->border.left = 1;
 			ft_border_weight_from_left(game);
 		}
@@ -41,24 +41,24 @@ static void	ft_top_player_adjustment(t_game *game)
 	}
 }
 
-static void	ft_down_player_adjustment(t_game *game)
+static void	ft_bottom_player_adjustment(t_game *game)
 {
-	if (game->border.up == 1 && ft_check_the_up(*game))
+	if (game->border.top == 1 && ft_check_the_top(*game))
 	{
-		game->border.down = 1;
-		game->border.up = 0;
-		ft_border_weight_from_down(game);
+		game->border.bottom = 1;
+		game->border.top = 0;
+		ft_border_weight_from_bottom(game);
 	}
-	if (game->border.down == 1)
+	if (game->border.bottom == 1)
 	{
-		if (ft_check_the_down(*game) == 1)
+		if (ft_check_the_bottom(*game) == 1)
 		{
 			ft_desactivate_border(game);
-			game->border.down = 0;
+			game->border.bottom = 0;
 		}
-		else if (ft_check_the_down(*game) == -1)
+		else if (ft_check_the_bottom(*game) == -1)
 		{
-			game->border.down = 0;
+			game->border.bottom = 0;
 			game->border.right = 1;
 			ft_border_weight_from_right(game);
 		}
@@ -77,6 +77,6 @@ void		ft_strat_adjustment(t_game *game)
 		if (ft_is_top_player(*game))
 			ft_top_player_adjustment(game);
 		else
-			ft_down_player_adjustment(game);
+			ft_bottom_player_adjustment(game);
 	}
 }

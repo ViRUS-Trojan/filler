@@ -5,14 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdelsie <vdelsie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/27 17:33:23 by vdelsie           #+#    #+#             */
-/*   Updated: 2020/02/05 21:59:24 by vdelsie          ###   ########.fr       */
+/*   Created: 2020/02/07 16:46:08 by vdelsie           #+#    #+#             */
+/*   Updated: 2020/02/07 16:46:12 by vdelsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	ft_border_weight_from_down(t_game *game)
+void	ft_border_weight_from_top(t_game *game)
+{
+	int		i;
+	int		j;
+	int		value;
+	int		max_border;
+
+	max_border = ft_max(game->h_map, game->w_map);
+	i = 0;
+	value = max_border;
+	while (i < game->h_map)
+	{
+		j = 0;
+		while (j < game->w_map)
+		{
+			game->strat_map[i][j].border = value;
+			j++;
+		}
+		i++;
+		value--;
+	}
+}
+
+void	ft_border_weight_from_bottom(t_game *game)
 {
 	int		i;
 	int		j;
@@ -77,29 +100,6 @@ void	ft_border_weight_from_left(t_game *game)
 			i++;
 		}
 		j++;
-		value--;
-	}
-}
-
-void	ft_border_weight_from_up(t_game *game)
-{
-	int		i;
-	int		j;
-	int		value;
-	int		max_border;
-
-	max_border = ft_max(game->h_map, game->w_map);
-	i = 0;
-	value = max_border;
-	while (i < game->h_map)
-	{
-		j = 0;
-		while (j < game->w_map)
-		{
-			game->strat_map[i][j].border = value;
-			j++;
-		}
-		i++;
 		value--;
 	}
 }

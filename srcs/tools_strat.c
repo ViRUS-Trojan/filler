@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tools_strat.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdelsie <vdelsie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/27 19:12:07 by vdelsie           #+#    #+#             */
-/*   Updated: 2020/02/04 13:48:49 by vdelsie          ###   ########.fr       */
+/*   Created: 2020/02/07 18:19:09 by vdelsie           #+#    #+#             */
+/*   Updated: 2020/02/07 18:19:11 by vdelsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int		main(void)
+int		ft_border_is_activate(t_game game)
 {
-	t_game	game;
-	int		round;
+	return (game.coef_border == 1);
+}
 
-	if (ft_first_init(&game) == -1)
-		ft_exit("Read error", 2);
-	round = 1;
-	while (1)
-	{
-		if (ft_get_data(&game) == -1)
-			break ;
-		ft_strat_map_calc(&game);
-		if (ft_put_piece(&game, round) == -1)
-			break ;
-		ft_strat_adjustment(&game);
-		ft_clear_all(&game);
-		round++;
-	}
-	ft_delete_all(&game);
-	return (0);
+int		ft_heat_is_activate(t_game game)
+{
+	return (game.coef_heat == 1);
+}
+
+void	ft_activate_heat(t_game *game)
+{
+	game->coef_heat = 1.0;
+	game->coef_border = 0;
+}
+
+void	ft_activate_border(t_game *game)
+{
+	game->coef_heat = 0;
+	game->coef_border = 1.0;
+}
+
+void	ft_desactivate_border(t_game *game)
+{
+	ft_activate_heat(game);
+	ft_clear_border_weight(game);
 }

@@ -15,10 +15,10 @@
 static void	ft_put_border_target(t_game game, int fd)
 {
 	ft_putstr_fd("Border target : ", fd);
-	if (game.border.up == 1)
-		ft_putstr_fd("UP", fd);
-	else if (game.border.down == 1)
-		ft_putstr_fd("DOWN", fd);
+	if (game.border.top == 1)
+		ft_putstr_fd("TOP", fd);
+	else if (game.border.bottom == 1)
+		ft_putstr_fd("BOTTOM", fd);
 	else if (game.border.right == 1)
 		ft_putstr_fd("RIGHT", fd);
 	else

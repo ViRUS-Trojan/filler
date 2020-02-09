@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdelsie <vdelsie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/27 17:37:14 by vdelsie           #+#    #+#             */
-/*   Updated: 2020/01/27 17:37:17 by vdelsie          ###   ########.fr       */
+/*   Created: 2020/02/07 16:46:54 by vdelsie           #+#    #+#             */
+/*   Updated: 2020/02/07 16:46:55 by vdelsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int		ft_check_the_up(t_game game)
+int		ft_check_the_top(t_game game)
 {
 	int		j;
 	int		opp_coin;
@@ -32,7 +32,7 @@ int		ft_check_the_up(t_game game)
 	return (0);
 }
 
-int		ft_check_the_down(t_game game)
+int		ft_check_the_bottom(t_game game)
 {
 	int		j;
 	int		opp_coin;

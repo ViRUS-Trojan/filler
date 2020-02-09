@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdelsie <vdelsie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/30 03:47:01 by vdelsie           #+#    #+#             */
-/*   Updated: 2020/02/02 17:51:48 by vdelsie          ###   ########.fr       */
+/*   Created: 2020/02/07 16:57:55 by vdelsie           #+#    #+#             */
+/*   Updated: 2020/02/07 16:57:56 by vdelsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,22 @@
 
 static int	ft_get_coin(t_game *game)
 {
-    char	*line;
+	char	*line;
 
-    get_next_line(0, &line);
-    if (ft_strequ("$$$ exec p1 : [./vdelsie.filler]", line))
-    //if (game->player_position == 1)
-    {
-        game->my_coin = 'O';
-        game->opp_coin = 'X';
-    }
-    else if (ft_strequ("$$$ exec p2 : [./vdelsie.filler]", line))
-    {
-        game->my_coin = 'X';
-        game->opp_coin = 'O';
-    }
-    else
-    {
-        ft_strdel(&line);
-        return (-1);
-    }
-    ft_strdel(&line);
-    return (0);
+	if (get_next_line(0, &line) == -1)
+		return (-1);
+	if (line[10] == '1')
+	{
+		game->my_coin = 'o';
+		game->opp_coin = 'x';
+	}
+	else
+	{
+		game->my_coin = 'x';
+		game->opp_coin = 'o';
+	}
+	ft_strdel(&line);
+	return (0);
 }
 
 static int	ft_get_map_size(t_game *game)
