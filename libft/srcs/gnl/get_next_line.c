@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: curquiza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vdelsie <vdelsie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 13:24:27 by curquiza          #+#    #+#             */
-/*   Updated: 2017/04/27 14:16:36 by curquiza         ###   ########.fr       */
+/*   Created: 2020/02/09 17:10:55 by vdelsie           #+#    #+#             */
+/*   Updated: 2020/02/09 17:12:38 by vdelsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 /*
-** ft_create_elem et ft_find_or_create :
-** Cherche si un maillon contenant le fd existe,
-** sinon créée le maillon et l'ajoute en fin de liste.
-** Vérifie aussi que le fd est sup. à zéro.
+** ft_create_elem и ft_find_or_create:
+** Узнайте, существует ли ссылка, содержащая fd,
+** в противном случае создайте ссылку и добавьте ее в конец списка.
+** Также проверьте, что fd является sup. в ноль.
 */
 
 t_file	*ft_create_elem(int fd)
@@ -58,8 +58,8 @@ t_file	*ft_find_or_create(t_file **begin, int fd)
 }
 
 /*
-** ft_remove_file :
-** En fin de lecture. Supprime le maillon contenant le fd.
+** ft_remove_file:
+** В конце чтения. Удалить ссылку, содержащую FD.
 */
 
 void	ft_remove_file(t_file **begin, int fd)
@@ -89,9 +89,9 @@ void	ft_remove_file(t_file **begin, int fd)
 }
 
 /*
-** ft_work_with_buff :
-** En fonction du contenu de buff, remplit line puis modifie buff.
-** Retourne 1 si un '\n' est trouvé, 0 sinon.
+** ft_work_with_buff:
+** В зависимости от содержимого баффа заполните строку, а затем измените бафф.
+** Возвращает 1, если '\ n' найден, 0 в противном случае.
 */
 
 int		ft_work_with_buff(char *buff, char **line)
@@ -123,16 +123,16 @@ int		ft_work_with_buff(char *buff, char **line)
 }
 
 /*
-** get_next_line :
-** Retourne 1 si une ligne a éte remplie dans line, 0 si le fichier a fini
-** d'être lu, et -1 en cas d'erreur.
+** get_next_line:
+** Возвращает 1, если строка была заполнена в строке, 0, если файл завершен
+** для чтения и -1 в случае ошибки.
 **
-** Le check de BUFF_SIZE n'est pas fait en premier pour que line ait
-** la posibilité d'être re-initialisée => évite les erreurs de double free
-** dans le main et les multi fd.
+** Проверка BUFF_SIZE не выполняется первой, поэтому строка
+** возможность повторной инициализации => позволяет избежать двойных ошибок
+** в основной и мульти фд.
 **
-** Le dernier check "*line != NULL" permet de ne pas retourner 0 tout de suite
-** si le fichier se termine par une ligne sans '\n'.
+** Последняя проверка "* line! = NULL" позволяет не возвращать 0 сразу
+** если файл заканчивается строкой без '\ n'.
 */
 
 int		get_next_line(const int fd, char **line)

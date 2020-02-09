@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmei <nmei@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vdelsie <vdelsie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/22 13:05:17 by nmei              #+#    #+#             */
-/*   Updated: 2018/01/23 00:32:43 by nmei             ###   ########.fr       */
+/*   Created: 2020/02/09 17:13:54 by vdelsie           #+#    #+#             */
+/*   Updated: 2020/02/09 17:13:55 by vdelsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <mlx.h>
 #include <libft.h>
-#include "filler_viz.h"
+#include "filler_vizusal.h"
 
 void	draw_rect(t_envars *env, int row, int col, int color)
 {
