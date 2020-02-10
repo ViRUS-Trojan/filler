@@ -6,13 +6,14 @@
 /*   By: vdelsie <vdelsie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 13:55:54 by vdelsie           #+#    #+#             */
-/*   Updated: 2020/02/04 14:00:08 by vdelsie          ###   ########.fr       */
+/*   Updated: 2020/02/10 18:22:53 by vdelsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_VIZUAL_H
 # define FILLER_VIZUAL_H
 # include <stddef.h>
+# include "libft.h"
 # define TURN_SWITCH	1
 # define PLACED			2
 # define P1_PLACED		4
